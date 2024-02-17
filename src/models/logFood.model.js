@@ -56,8 +56,7 @@ const loggedFoodSchema = new Schema(
 
 export const LoggedFood = mongoose.model("LoggedFood", loggedFoodSchema);
 
-
-// models/logFood.model.js
+//New model
 // import mongoose from "mongoose";
 // const { Schema } = mongoose;
 
