@@ -3,51 +3,59 @@ const { Schema } = mongoose;
 
 const loggedFoodSchema = new Schema(
   {
-      name: {
-      type: String,
-      required: true,
-    },
-    calorieValue: {
-      type: Number,
-      required: true,
-    },
-    quantity: {
-      type: Number,
-      required: true,
-    },
-    // Nutrients
-    carbs: {
-      type: Number,
-      required: true,
-    },
-    protein: {
-      type: Number,
-      required: true,
-    },
-    fat: {
-      type: Number,
-      required: true,
-    },
-    fibre: {
-      type: Number,
-      required: true,
-    },
-    iron: {
-      type: Number,
-      required: true,
-    },
-    calcium: {
-      type: Number,
-      required: true,
-    },
-    vitaminC: {
-      type: Number,
-      required: true,
-    },
-    mealTime: {
-      type: String,
-      required: true,
-    },
+      date:{
+        type: Date,
+        required: true
+      },
+      logs: [
+        {
+          name: {
+            type: String,
+            required: true,
+          },
+          calorieValue: {
+            type: Number,
+            required: true,
+          },
+          quantity: {
+            type: Number,
+            required: true,
+          },
+          // Nutrients
+          carbs: {
+            type: Number,
+            required: true,
+          },
+          protein: {
+            type: Number,
+            required: true,
+          },
+          fat: {
+            type: Number,
+            required: true,
+          },
+          fibre: {
+            type: Number,
+            required: true,
+          },
+          iron: {
+            type: Number,
+            required: true,
+          },
+          calcium: {
+            type: Number,
+            required: true,
+          },
+          vitaminC: {
+            type: Number,
+            required: true,
+          },
+          mealTime: {
+            type: String,
+            required: true,
+          },
+        }
+      ]
   },
   {
     timestamps: true,
@@ -55,83 +63,3 @@ const loggedFoodSchema = new Schema(
 );
 
 export const LoggedFood = mongoose.model("LoggedFood", loggedFoodSchema);
-
-//New model
-// import mongoose from "mongoose";
-// const { Schema } = mongoose;
-
-// const loggedFoodSchema = new Schema(
-//   {
-//     userId: {
-//       type: Schema.Types.ObjectId,
-//       ref: "User",
-//       required: true
-//     },
-//     logs: [
-//       {
-//         date: {
-//           type: Date,
-//           required: true
-//         },
-//         meals: [
-//           {
-//             mealTime: {
-//               type: String,
-//               required: true
-//             },
-//             foods: [
-//               {
-//                 name: {
-//                   type: String,
-//                   required: true
-//                 },
-//                 calorieValue: {
-//                   type: Number,
-//                   required: true
-//                 },
-//                 quantity: {
-//                   type: Number,
-//                   required: true
-//                 },
-//                 // Nutrients
-//                 carbs: {
-//                   type: Number,
-//                   required: true
-//                 },
-//                 protein: {
-//                   type: Number,
-//                   required: true
-//                 },
-//                 fat: {
-//                   type: Number,
-//                   required: true
-//                 },
-//                 fibre: {
-//                   type: Number,
-//                   required: true
-//                 },
-//                 iron: {
-//                   type: Number,
-//                   required: true
-//                 },
-//                 calcium: {
-//                   type: Number,
-//                   required: true
-//                 },
-//                 vitaminC: {
-//                   type: Number,
-//                   required: true
-//                 }
-//               }
-//             ]
-//           }
-//         ]
-//       }
-//     ]
-//   },
-//   {
-//     timestamps: true
-//   }
-// );
-
-// export const LoggedFood = mongoose.model("LoggedFood", loggedFoodSchema);
