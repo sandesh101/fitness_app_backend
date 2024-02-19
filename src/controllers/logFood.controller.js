@@ -37,22 +37,17 @@ const logFoodController = async (req, res) => {
     // Creating the logged food
     const loggedFood = await LoggedFood.create({
       userId: req.user.id,
-      date: currentDate,
-      logs: [
-        {
-          name,
-          calorieValue,
-          quantity,
-          carbs,
-          protein,
-          fat,
-          fibre,
-          iron,
-          calcium,
-          vitaminC,
-          mealTime,
-        }
-      ],
+      name,
+      calorieValue,
+      quantity,
+      carbs,
+      protein,
+      fat,
+      fibre,
+      iron,
+      calcium,
+      vitaminC,
+      mealTime,
     });
 
     // console.log(req.body);
