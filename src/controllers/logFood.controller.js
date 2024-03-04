@@ -23,6 +23,7 @@ const logFoodController = async (req, res) => {
     if (!loggedFood) {
       return res.status(400).json(new ApiResponse(400, "Some Error Occurred"));
     } else {
+      // const currentDate = new Date.toLocaleString();
       return res.status(201).json(new ApiResponse(200, loggedFood, "Logged Successfully"));
     }
   } catch (err) {
