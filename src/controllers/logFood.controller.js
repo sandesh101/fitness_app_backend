@@ -6,7 +6,7 @@ const logFoodController = async (req, res) => {
     const { mealTime, ...foodData } = req.body;
 
     // Check if mealTime is provided and is one of the allowed values
-    if (!mealTime || !['Breakfast', 'Snacks', 'Lunch', 'Dinner'].includes(mealTime)) {
+    if (!mealTime || !['Breakfasts', 'Snacks', 'Lunch', 'Dinner'].includes(mealTime)) {
       return res.status(400).json({ error: 'Invalid or missing meal time' });
     }
 
