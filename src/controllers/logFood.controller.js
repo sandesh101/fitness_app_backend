@@ -5,12 +5,13 @@ const logFoodController = async (req, res) => {
   try {
     const { mealTime, ...foodData } = req.body;
 
+    const userId = req.user.id;
+
     // Check if mealTime is provided and is one of the allowed values
-    if (!mealTime || !['Breakfasts', 'Snacks', 'Lunch', 'Dinner'].includes(mealTime)) {
+    if (!mealTime || !['Breakfast', 'Snacks', 'Lunch', 'Dinner'].includes(mealTime)) {
       return res.status(400).json({ error: 'Invalid or missing meal time' });
     }
 
-    // Check if food data fields are present and have valid values
     const requiredFields = ['name', 'calorieValue', 'quantity', 'carbs', 'protein', 'fat', 'fibre', 'iron', 'calcium', 'vitaminC'];
     for (const field of requiredFields) {
       if (!(field in foodData) || !foodData[field]) {
@@ -18,7 +19,7 @@ const logFoodController = async (req, res) => {
       }
     }
 
-    const loggedFood = await LoggedFood.create({ mealTime, foodData });
+    const loggedFood = await LoggedFood.create({ userId, mealTime, foodData });
 
     if (!loggedFood) {
       return res.status(400).json(new ApiResponse(400, "Some Error Occurred"));
@@ -34,12 +35,13 @@ const logFoodController = async (req, res) => {
 
 const getLoggedFood = async (req, res) => {
   try {
-    const userId = req.user._id;
+    const userId = req.user.id;
+    if (!userId) return res.status(400).json(new ApiResponse(400, null, "Invalid User"));
 
-    const loggedFoodDetails = await LoggedFood.find({ userId });
+    const loggedFoodDetails = await LoggedFood.find({ userId: userId });
 
-    if (!loggedFoodDetails) {
-      return res.status(400).json(new ApiResponse(400, "Error Getting Data"));
+    if (!loggedFoodDetails || loggedFoodDetails.length === 0) {
+      return res.status(404).json(new ApiResponse(404, [], "No data found for the user"));
     } else {
       return res.status(200).json(new ApiResponse(200, loggedFoodDetails, "Success"));
     }
@@ -48,5 +50,7 @@ const getLoggedFood = async (req, res) => {
     return res.status(500).json(new ApiResponse(500, "Internal Server Error"));
   }
 };
+
+
 
 export { logFoodController, getLoggedFood };
